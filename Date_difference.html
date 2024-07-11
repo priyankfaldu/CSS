@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date difference</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .main {
+            background-color: rgb(243, 239, 246);
+            width: 100%;
+            height: 100vh;
+            /* outline: 5px solid #fff; */
+            outline-offset: -200px;
+            position: relative;
+        }
+
+        .sub {
+            border-radius: 30px;
+            width: 80%;
+            height: 450px;
+            margin: 0 auto;
+
+            border: 2px solid orange;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+        }
+
+        .sub h1 {
+            font-size: 40px;
+            padding-bottom: 10px;
+            text-align: center;
+            margin: 0 auto;
+            color: chocolate;
+            padding-top: 50px;
+
+            letter-spacing: 1.5px;
+        }
+
+        label {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: justify;
+            letter-spacing: 1.5px;
+            color: chocolate;
+            padding-left: 300px;
+        }
+
+        input {
+            width: 350px;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 30px;
+            border: none;
+            background-color: rgb(247, 218, 180);
+            margin-top: 25px;
+        }
+
+        button {
+            width: 350px;
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: rgb(245, 216, 161);
+            color: black;
+            font-size: 20px;
+            transition: all 0.5s;
+            border-radius: 30px;
+            border: none;
+            margin-top: 25px;
+        }
+
+        button:hover {
+            background-color: orange;
+            color: #fff;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="sub">
+            <h1>Date Difference</h1>
+            <table>
+                <tr>
+                    <td>
+                        <label>First Date:</label>
+                    </td>
+                    <td>
+                        <input id="date1" type="date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Second Date:</label>
+                    </td>
+                    <td>
+                        <input id="date2" type="date"><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button onclick="getdate();" type="button">Calculate Difference</button></td>
+                </tr>
+            </table>
+            <br>
+            <h2 id="msg"><span id="year"> 0 </span> Year <span id="month"> 0 </span> Month <span id="day">0</span> Day
+            </h2>
+        </div>
+    </div>
+    <script>
+
+        getdate = () => {
+            let date1 = document.getElementById("date1").value
+            let date2 = document.getElementById("date2").value
+
+            if ((date1 != "" && date2 != "") && (date1 < date2)) {
+                date1 = new Date(date1);
+                date2 = new Date(date2);
+
+
+
+                let years = date2.getFullYear() - date1.getFullYear();
+
+
+                let month = 12 - (date1.getMonth() + 1) + date2.getMonth();
+
+
+                let days = 31 - (date1.getDate()) + date2.getDate();
+
+
+                if (days >= 31) {
+                    month++;
+                    days = days - 31;
+                }
+                if (month >= 12) {
+                    year++;
+                    month = month - 12;
+                }
+                if(years%4==0){
+                    days++
+
+                }
+                document.getElementById("year").innerHTML = years;
+                document.getElementById("month").innerHTML = month;
+                document.getElementById("day").innerHTML = days;
+            }
+        }
+    </script>
+</body>
+
+</html>
